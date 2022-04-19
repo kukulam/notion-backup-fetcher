@@ -3,7 +3,7 @@ ALL_SRC?=$$(find ./ -name '*.go')
 .default: build
 
 build:
-	go build ./...
+	go build ./cmd/...
 .PHONY: build
 
 check: imports fmt lint vet
