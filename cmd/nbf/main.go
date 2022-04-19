@@ -1,8 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"notion-backup-fetcher/internal/nbf"
+	"os"
+
+	"github.com/urfave/cli"
+)
 
 func main() {
-	fmt.Println("Starting")
+	app := cli.NewApp()
+	app.Name = "notion-backup-fetcher"
+	app.Usage = "nbf --url https://www.notion.so/kukulam/root-123456"
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:     "url",
+			Usage:    "root notion page url e.x. https://www.notion.so/[username]/[page-id]",
+			Required: true,
+		},
+	}
+	app.Action = func(c *cli.Context) error {
+		return nbf.FetchCommand()
+	}
 
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
