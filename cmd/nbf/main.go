@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	app := cli.NewApp()
+app := cli.NewApp()
 	app.Name = "notion-backup-fetcher"
 	app.Usage = "nbf --url https://www.notion.so/kukulam/root-123456"
 	app.Flags = []cli.Flag{
@@ -19,10 +19,8 @@ func main() {
 			Required: true,
 		},
 	}
-	app.Action = func(c *cli.Context) error {
-		return nbf.FetchCommand()
-	}
-
+	app.Action = nbf.FetchCommand
+	
 	err := app.Run(os.Args)
 	if err != nil {
 		log.Fatal(err)
