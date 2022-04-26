@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+	logger := nbf.NewLogger()
+
 app := cli.NewApp()
 	app.Name = "notion-backup-fetcher"
 	app.Usage = "nbf --url https://www.notion.so/kukulam/root-123456"
@@ -19,7 +21,9 @@ app := cli.NewApp()
 			Required: true,
 		},
 	}
-	app.Action = nbf.FetchCommand
+	app.Action = func (c *cli.Context) error {
+		return nbf.FetchCommand(c, logger)
+	}
 	
 	err := app.Run(os.Args)
 	if err != nil {

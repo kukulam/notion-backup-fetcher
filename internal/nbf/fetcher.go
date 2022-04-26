@@ -6,11 +6,10 @@ import (
 	"github.com/urfave/cli"
 )
 
-var logger = NewLogger()
 
-func FetchCommand(c *cli.Context) error {
+func FetchCommand(c *cli.Context, logger *Logger) error {
 	rootPageUrl := c.String("url")
-	logger.debug(fmt.Sprintf("fetching root url: %s", rootPageUrl))
+	logger.debug(fmt.Sprintf("starting root url: %s", rootPageUrl))
 
 	return nil
 }
